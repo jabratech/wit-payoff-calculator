@@ -1,0 +1,23 @@
+interface calculator {
+    use jabratech:common/types.{option-kind, side, response};
+
+    record payoff-request {
+        dimension: option<u64>,
+        spot: f64,
+        options: list<options-request>
+    }
+    
+    record options-request {
+        strike: f64,
+        option-kind: option-kind, 
+        side: side,
+        ccy2: f64
+    }
+
+    record payoff-response {
+        x: list<f64>,
+        y: list<f64>
+    }
+
+    calculate-payoff: func(request: payoff-request) -> result<payoff-response, response>;
+}
